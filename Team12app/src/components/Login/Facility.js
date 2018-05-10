@@ -13,6 +13,9 @@ const AppNavigation = () => (
 );
 
 export default class Facility extends React.Component {
+static navigationOptions = {
+    title: 'Welcome',
+  };
   render() {
     return (
        <View >
