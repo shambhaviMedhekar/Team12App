@@ -1,11 +1,52 @@
     import React, {Component} from 'react';
-    import {View, StyleSheet,Image, Text, TextInput, TouchableOpacity,StatusBar, Button, navigation,navigate} from 'react-native';
+    import {View, StyleSheet,Image, Text, TextInput, TouchableOpacity,StatusBar, Button, navigation,navigate, Alert} from 'react-native';
     import Facility from './Facility';
     import {Actions} from 'react-native-router-flux';
     export default class LoginFormTrial extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+          TextInputUserName: ''
+
+        }
+      }
 
     onLogin2 = () =>{
-    Actions.facility()
+     const { TextInputUserName }  = this.state ;
+     const { TextInputpwd }  = this.state ;
+     //Alert.alert(TextInputUserName);
+     //Alert.alert(TextInputpwd);
+
+      return fetch('https://zcx23fv688.execute-api.us-east-1.amazonaws.com/dev/AuthenticateUser', {
+                      method: 'POST',
+                      headers: {
+                               'Accept': 'application/json',
+                               'Content-Type': 'application/json'
+                               },
+                      body: JSON.stringify({UserName: TextInputUserName, Password:TextInputpwd})
+                    })
+                   .then((response) => response.json())
+                         .then((responseJson) => {
+                           this.setState({
+                             isLoading: false,
+                             dataSource: responseJson,
+                           }, function(){
+                            alert(this.state.dataSource.Role);
+                                if (this.state.dataSource.Role == "Admin"){
+                                 Actions.facility();
+                                }
+                                else if (JSON.stringify(this.state.dataSource.Role) == "User"){
+                               // Actions.facilityforUser(this.state.dataSource.Id);
+                                }
+
+                           });
+
+                         })
+                         .catch((error) =>{
+                           console.error(error);
+                         });
+
+
     ;}
 
     render(){
@@ -16,15 +57,17 @@
             placeholder="username"
             placeholderTextColor="rgba(255,255,255,0.5)"
             keyboardType="email-address"
+            onChangeText={TextInputUserName => this.setState({TextInputUserName})}
             autoCapitalize="none"
             autoCorrect={false}/>
         <TextInput style={styles.input}
             placeholder="password"
             placeholderTextColor="rgba(255,255,255,0.5)"
+            onChangeText={TextInputpwd => this.setState({TextInputpwd})}
             secureTextEntry/>
          <TouchableOpacity style={styles.buttoncontainer} onPress={this.onLogin2}>
          <Text style={styles.buttontext}>Login</Text>
-                 </TouchableOpacity>
+          </TouchableOpacity>
     </View>
     );
     }
