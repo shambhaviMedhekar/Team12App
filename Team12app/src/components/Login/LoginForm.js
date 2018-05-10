@@ -12,10 +12,16 @@ import {
 import Facility from './Facility';
 
 export default class LoginForm extends Component{
-
+onLogin(){
+const { navigate } = this.props.navigation;
+return(
+navigate('Facility')
+);}
   render() {
-   const { navigate } = this.props.navigation;
-    return (
+
+const { navigate } = this.props.navigation;
+return (
+
 <View>
     <Text style={styles.inputtext}>UserName: </Text>
             <TextInput placeholder="Please enter username" returnKeyType="next"
@@ -25,7 +31,8 @@ export default class LoginForm extends Component{
             <TextInput secureTextEntry  placeholder="Please enter password"
             onChangeText={TextInputpwd => this.setState({TextInputpwd})}
             style={styles.input}/>
-      <Button style={styles.buttoncontainer} onPress={()=>navigate('Facility')} title="Login" />
+      <Button style={styles.buttoncontainer} onPress={()=>this.onLogin()}
+      title='Login'/>
     </View>
     );
   }
