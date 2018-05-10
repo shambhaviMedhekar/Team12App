@@ -1,21 +1,16 @@
 import React from 'react';
-import { FlatList, ActivityIndicator, Text, View, StyleSheet,TouchableOpacity  } from 'react-native';
+import { FlatList, ActivityIndicator, Text,TextInput, View, StyleSheet,TouchableOpacity  } from 'react-native';
 import {List, ListItem} from 'react-native-elements';
-import ResourceDetails from './ResourceDetails';
-import {Actions} from 'react-native-router-flux';
-export default class FacilityDetails extends React.Component {
-
+export default class ResourceDetails extends React.Component {
 
   constructor(props){
     super(props);
-    this.state ={ isLoading: true}
+    this.state ={ isLoading: true},
+    this.state.dataSource=""
   }
-onResourceClick
- onResourceClick = (resourceID)=>{
- Actions.resourceDetails ({id: resourceID})
- }
+
   componentDidMount(){
-    return fetch('https://zcx23fv688.execute-api.us-east-1.amazonaws.com/dev/GetAllInventoryForFacility', {
+    return fetch('https://zcx23fv688.execute-api.us-east-1.amazonaws.com/dev/GetInventoryById', {
                   method: 'POST',
                   headers: {
                            'Accept': 'application/json',
@@ -37,6 +32,8 @@ onResourceClick
                        console.error(error);
                      });
   }
+
+  renderRow
   render(){
 
     if(this.state.isLoading){
@@ -48,18 +45,25 @@ onResourceClick
     }
  return(
       <View style={styles.container}>
-      <Text style={styles.title}>Facility:</Text>
-      <List>
+      <Text style={styles.title}>Resource:</Text>
+
         <FlatList
           data={this.state.dataSource}
           renderItem={({item}) =>
+          <View>
+                <Text>{item.Name}</Text>
+                <Text>{item.Description}</Text>
+                <Text>{item.Color}</Text>
 
-          <ListItem title={`${item.Name}`}
-          onPress={() =>this.onResourceClick(item.Id)}
-          />}
+                <TextInput value={item.CurrentQuantity}
+                            keyboardType="numeric"
+                            />
+                <Text>{item.Comments}</Text>
+        </View>
+          }
           keyExtractor={(item, index) => index}
         />
-        </List>
+
       </View>
     );
   }
@@ -92,6 +96,15 @@ title : {
                 textAlign:'center',
                 color:'#fff',
                 fontWeight:'700'
-                }
+                },
+                     input:{
+                     height:40,
+                     width:300,
+                     backgroundColor:'rgba(255,255,255,0.2)',
+                     marginBottom:15,
+                     color:'#fff',
+                     paddingHorizontal:10,
+                     borderRadius:20
+                     }
 
 });

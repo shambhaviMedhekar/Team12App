@@ -3,6 +3,7 @@ import {Router, Stack, Scene} from 'react-native-router-flux';
 import Facility from './Facility';
 import LoginTrial from './LoginTrial';
 import FacilityDetails from './FacilityDetails';
+import ResourceDetails from './ResourceDetails';
 export default class Routes extends React.Component {
   render() {
 
@@ -12,6 +13,7 @@ export default class Routes extends React.Component {
                 <Scene key="login" component={LoginTrial} title="Login"/>
                 <Scene key="facility" component={Facility} title="Facility"/>
                 <Scene key="facilityDetails" component={FacilityDetails} title="FacilityDetails"/>
+                <Scene key="resourceDetails" component={ResourceDetails} title="ResourceDetails"/>
             </Stack>
         </Router>
 
