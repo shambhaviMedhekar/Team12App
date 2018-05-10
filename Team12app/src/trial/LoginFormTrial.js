@@ -3,26 +3,28 @@
     import Facility from './Facility';
     import {Actions} from 'react-native-router-flux';
     export default class LoginFormTrial extends Component {
+
     onLogin2 = () =>{
     Actions.facility()
     ;}
+
     render(){
     return(
     <View style={styles.container}>
 
-    <TextInput style={styles.input}
-        placeholder="username"
-        placeholderTextColor="rgba(255,255,255,0.5)"
-        keyboardType="email-address"
-        autoCapitalize="none"
-        autoCorrect={false}/>
-    <TextInput style={styles.input}
-        placeholder="password"
-        placeholderTextColor="rgba(255,255,255,0.5)"
-        secureTextEntry/>
-     <TouchableOpacity style={styles.buttoncontainer} onPress={this.onLogin2}>
-     <Text style={styles.buttontext}>Login</Text>
-             </TouchableOpacity>
+        <TextInput style={styles.input}
+            placeholder="username"
+            placeholderTextColor="rgba(255,255,255,0.5)"
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}/>
+        <TextInput style={styles.input}
+            placeholder="password"
+            placeholderTextColor="rgba(255,255,255,0.5)"
+            secureTextEntry/>
+         <TouchableOpacity style={styles.buttoncontainer} onPress={this.onLogin2}>
+         <Text style={styles.buttontext}>Login</Text>
+                 </TouchableOpacity>
     </View>
     );
     }

@@ -1,18 +1,21 @@
 import React from 'react';
-import { FlatList, ActivityIndicator, Text, View, StyleSheet  } from 'react-native';
-
+import { FlatList, ActivityIndicator, Text, View, StyleSheet,TouchableOpacity, Alert } from 'react-native';
+import {Actions} from 'react-native-router-flux';
 export default class Facility extends React.Component {
 
   constructor(props){
     super(props);
-    this.state ={ isLoading: true}
+    this.state ={
+    isLoading: true
+    }
   }
-
+ onFacilityClick = (facilityID)=>{
+ Actions.facilityDetails ({id: facilityID})
+ }
   componentDidMount(){
     return fetch('https://zcx23fv688.execute-api.us-east-1.amazonaws.com/dev/GetAllFacilities')
       .then((response) => response.json())
       .then((responseJson) => {
-
         this.setState({
           isLoading: false,
           dataSource: responseJson,
@@ -26,8 +29,6 @@ export default class Facility extends React.Component {
       });
   }
 
-
-
   render(){
 
     if(this.state.isLoading){
@@ -39,25 +40,48 @@ export default class Facility extends React.Component {
     }
 
     return(
-      <View style={{flex: 1, paddingTop:20}}>
-      <Text style={styles.title}>Facility</Text>
+      <View style={styles.container}>
+      <Text style={styles.title}>Facilities For User:</Text>
         <FlatList
           data={this.state.dataSource}
-          renderItem={({item}) => <Text>{item.Name}, {item.Landmark}</Text>}
-          keyExtractor={(item, index) => index}
+          renderItem={({item}) =>
+          <TouchableOpacity style={styles.buttoncontainer}
+          onPress={() =>this.onFacilityClick(item.id)}>
+          <Text style={styles.buttontext}>{item.Name}{item.id}</Text></TouchableOpacity>}
+          keyExtractor={(item, index) => item.id}
         />
       </View>
     );
   }
 }
 const styles = StyleSheet.create({
+ container: {
+        flex: 1,
+        backgroundColor:'#3498db',
+flex: 1, paddingTop:20
+    },
 title : {
-      color:'#3f3f3f',
+      color:'#fff',
       marginTop:10,
       fontSize: 20,
       fontWeight: 'bold',
       textAlign: 'center',
       opacity:0.9
-      }
+      },
+           buttoncontainer:{
+           backgroundColor:'#2980b9',
+           paddingVertical:10,
+           borderRadius:20,
+           marginBottom:10,
+           marginTop:10,
+           width:300,
+           alignItems: 'center',
+
+           },
+                buttontext:{
+                textAlign:'center',
+                color:'#fff',
+                fontWeight:'700'
+                }
 
 });
