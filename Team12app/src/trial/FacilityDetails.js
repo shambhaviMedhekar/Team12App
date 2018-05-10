@@ -1,6 +1,6 @@
 import React from 'react';
-import { FlatList, ListItem,ActivityIndicator, Text, View, StyleSheet,TouchableOpacity  } from 'react-native';
-
+import { FlatList, ActivityIndicator, Text, View, StyleSheet,TouchableOpacity  } from 'react-native';
+import {List, ListItem} from 'react-native-elements';
 export default class FacilityDetails extends React.Component {
 
   constructor(props){
@@ -17,19 +17,19 @@ export default class FacilityDetails extends React.Component {
                            },
                   body: JSON.stringify({Id: this.props.id, StrJson: "Jaffa"})
                 })
-                .then((response) => response.json())
-                .then((responseJson) => {
-                        this.setState({
-                          isLoading: false,
-                          dataSource: responseJson,
-                        }, function(){
+               .then((response) => response.json())
+                     .then((responseJson) => {
+                       this.setState({
+                         isLoading: false,
+                         dataSource: responseJson,
+                       }, function(){
 
-                        });
+                       });
 
-                      })
-                      .catch((error) =>{
-                        console.error(error);
-                      });
+                     })
+                     .catch((error) =>{
+                       console.error(error);
+                     });
   }
   render(){
 
@@ -40,16 +40,20 @@ export default class FacilityDetails extends React.Component {
         </View>
       )
     }
-
-    return(
+ return(
       <View style={styles.container}>
       <Text style={styles.title}>Facility:</Text>
+      <List>
         <FlatList
           data={this.state.dataSource}
-          renderItem={({item}) => <ListItem title={item.Name}}
-                                                        subtitle={item.Description}/>}
+          renderItem={({item}) =>
+
+          <ListItem title={`${item.Name}`}
+          onPress={() =>this.onResourceClick(item.id)}
+          />}
           keyExtractor={(item, index) => index}
         />
+        </List>
       </View>
     );
   }

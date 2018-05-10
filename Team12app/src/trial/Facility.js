@@ -47,7 +47,7 @@ export default class Facility extends React.Component {
           renderItem={({item}) =>
           <TouchableOpacity style={styles.buttoncontainer}
           onPress={() =>this.onFacilityClick(item.id)}>
-          <Text style={styles.buttontext}>{item.Name}{item.id}</Text></TouchableOpacity>}
+          <Text style={styles.buttontext}>{item.Name}</Text></TouchableOpacity>}
           keyExtractor={(item, index) => item.id}
         />
       </View>
