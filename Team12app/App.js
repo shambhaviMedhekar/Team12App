@@ -5,25 +5,15 @@ import {
   View,
   Button,StyleSheet
 } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import LoginForm from './src/components/Login/LoginForm';
-import Login from './src/components/Login/Login';
-import Facility from './src/components/Login/Facility';
-
-const  SimpleAppNavigator = StackNavigator({
-  LoginForm: { screen: LoginForm },
-  Facility: { screen: Facility }
-});
+import { createStackNavigator } from 'react-navigation';
+import Facility from './src/trial/Facility';
+import LoginTrial from './src/trial/LoginTrial';
+import Routes from './src/trial/Routes';
 
 export default class App extends React.Component {
   render() {
     return (
-    <View style={styles.container}>
-             <Login/>
-
-                <SimpleAppNavigator/>
-
-          </View>
+                <Routes/>
 
     );
   }
@@ -32,7 +22,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#f6f6f6'
+    backgroundColor:'#f5fcff'
   },
   title : {
   color:'#3f3f3f',
