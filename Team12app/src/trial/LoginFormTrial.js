@@ -37,7 +37,7 @@
                                }
                                else if (this.state.dataSource.Role == "User"){
                                 const userID = this.state.dataSource.Id;
-                                //Actions.facilityforUser(userID);
+                                Actions.facilityforUser({id: userID});
                                }
                            }
                            else{
