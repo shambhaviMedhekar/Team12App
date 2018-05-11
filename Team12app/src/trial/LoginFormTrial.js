@@ -1,6 +1,7 @@
     import React, {Component} from 'react';
     import {View, StyleSheet,Image, Text, TextInput, TouchableOpacity,StatusBar, Button, navigation,navigate, Alert} from 'react-native';
     import Facility from './Facility';
+     import FacilityforUser from './FacilityforUser';
     import {Actions} from 'react-native-router-flux';
     export default class LoginFormTrial extends Component {
     constructor(props) {
@@ -14,8 +15,6 @@
     onLogin2 = () =>{
      const { TextInputUserName }  = this.state ;
      const { TextInputpwd }  = this.state ;
-     //Alert.alert(TextInputUserName);
-     //Alert.alert(TextInputpwd);
 
       return fetch('https://zcx23fv688.execute-api.us-east-1.amazonaws.com/dev/AuthenticateUser', {
                       method: 'POST',
@@ -31,13 +30,20 @@
                              isLoading: false,
                              dataSource: responseJson,
                            }, function(){
-                            alert(this.state.dataSource.Role);
-                                if (this.state.dataSource.Role == "Admin"){
-                                 Actions.facility();
-                                }
-                                else if (JSON.stringify(this.state.dataSource.Role) == "User"){
-                               // Actions.facilityforUser(this.state.dataSource.Id);
-                                }
+                           if(this.state.dataSource.Id !=0 )
+                           {
+                               if (this.state.dataSource.Role == "Admin"){
+                                Actions.facility();
+                               }
+                               else if (this.state.dataSource.Role == "User"){
+                                const userID = this.state.dataSource.Id;
+                                //Actions.facilityforUser(userID);
+                               }
+                           }
+                           else{
+                           alert("User Name or Password is invalid!");
+                           }
+
 
                            });
 
