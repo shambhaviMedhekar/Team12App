@@ -45,8 +45,10 @@ onUpdate = (resource)=>{
 
 const { TextInputCQ }  = this.state ;
 const { TextInputComments }  = this.state ;
+
 var cQvalue ="";
 var commentsValue="";
+
 if(!TextInputCQ){
 cQvalue=resource.CurrentQuantity;
 }
@@ -75,26 +77,26 @@ commentsValue=TextInputComments;
                                                             quantity: 1,
                                                             currentQuantity: cQvalue,
                                                             comments: commentsValue,
-                                                            assignedTo: 1,
+                                                            assignedTo: resource.AssignedTo,
                                                             icon: "",
                                                             size:"",
                                                             isActive:resource.IsActive,
-                                                            createdBy:1,
+                                                            createdBy:resource.CreatedBy,
                                                             createdDate:"2018-05-10T20:07:34.1713851+00:00",
-                                                            modifiedBy:1,
+                                                            modifiedBy:global.userid,
                                                             modifiedDate: "2018-05-10T20:07:34.1713851+00:00"})
 
                  })
                  .then((response) => response.json())
                                           .then((responseJson) => {
-
+                                            
                                             this.setState({
                                               isLoading: false,
                                               data: responseJson
                                             }, function(){
                                             if(this.state.data.Status=="Success"){
                                                 if(global.role == 'Admin'){
-                                                    Actions.facility();
+                                                    Actions.facilityDetails({id : resource.AssignedTo});
                                                 }
                                                 else{
                                                     Actions.facilityforUser({id: global.userid});

@@ -36,13 +36,13 @@
                            if(this.state.dataSource.Id !=0 )
                            {
                            global.role=this.state.dataSource.Role;
-
+                            global.userid = this.state.dataSource.Id;
                                if (this.state.dataSource.Role == "Admin"){
                                 Actions.facility();
                                }
                                else if (this.state.dataSource.Role == "User"){
                                 const userID = this.state.dataSource.Id;
-                                global.userid = this.state.dataSource.Id;
+
                                 Actions.facilityforUser({id: userID});
                                }
                            }
