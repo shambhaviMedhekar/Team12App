@@ -13,6 +13,9 @@ class NavBar extends Component {
       <TouchableOpacity onPress={() => Actions.facility()}>
      <Text>Facilities</Text>
       </TouchableOpacity>
+       <TouchableOpacity onPress={() => Actions.login()}>
+           <Text>Logout</Text>
+            </TouchableOpacity>
 
 
     </View>

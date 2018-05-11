@@ -16,11 +16,11 @@ export default class Routes extends React.Component {
 
                 <Scene key="facility" component={Facility} title="Facility" navBar={NavBar} navigationBarStyle={{backgroundColor:'transparent',height:50,marginTop:30, borderBottomWidth:0}}/>
 
-                <Scene key="facilityDetails" component={FacilityDetails} title="FacilityDetails" navBar={NavBar}/>
+                <Scene key="facilityDetails" component={FacilityDetails} title="FacilityDetails" navBar={NavBar} navigationBarStyle={{backgroundColor:'transparent',height:50,marginTop:30, borderBottomWidth:0}}/>
 
-              <Scene key="facilityforUser" component={FacilityforUser} title="FacilityforUser"/>
+              <Scene key="facilityforUser" component={FacilityforUser} title="FacilityforUser" navBar={NavBar} navigationBarStyle={{backgroundColor:'transparent',height:50,marginTop:30, borderBottomWidth:0}}/>
 
-                <Scene key="resourceDetails" component={ResourceDetails} title="ResourceDetails"/>
+                <Scene key="resourceDetails" component={ResourceDetails} title="ResourceDetails" navBar={NavBar} navigationBarStyle={{backgroundColor:'transparent',height:50,marginTop:30, borderBottomWidth:0}}/>
             </Stack>
         </Router>
 

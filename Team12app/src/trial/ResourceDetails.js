@@ -2,6 +2,8 @@ import React from 'react';
 import { FlatList, ActivityIndicator, Text,TextInput, View, StyleSheet,TouchableOpacity, Alert  } from 'react-native';
 import {List, ListItem} from 'react-native-elements';
 import { Col, Row, Grid } from "react-native-easy-grid";
+import {Actions} from 'react-native-router-flux';
+
 export default class ResourceDetails extends React.Component {
 
   constructor(props){
@@ -25,14 +27,11 @@ export default class ResourceDetails extends React.Component {
                 })
                .then((response) => response.json())
                      .then((responseJson) => {
-                     alert(responseJson.json())
+
                        this.setState({
                          isLoading: false,
-                         dataSource: responseJson,
-                         TextInputCQ:responseJson.CurrentQuantity
+                         dataSource: responseJson
                        }, function(){
-                       const { TextInputCQ }  = this.state ;
-
                                 });
 
                               })
@@ -42,11 +41,25 @@ export default class ResourceDetails extends React.Component {
   }
 
 
-onUpdate = (resourceId)=>{
+onUpdate = (resource)=>{
 
 const { TextInputCQ }  = this.state ;
 const { TextInputComments }  = this.state ;
+var cQvalue ="";
+var commentsValue="";
+if(!TextInputCQ){
+cQvalue=resource.CurrentQuantity;
+}
+else{
+cQvalue=TextInputCQ;
 
+}
+if(!TextInputComments){
+commentsValue=resource.CurrentQuantity;
+}
+else{
+commentsValue=TextInputComments;
+}
 
 
  return fetch('https://zcx23fv688.execute-api.us-east-1.amazonaws.com/dev/InsertUpdateResource', {
@@ -55,17 +68,17 @@ const { TextInputComments }  = this.state ;
                             'Accept': 'application/json',
                             'Content-Type': 'application/json'
                             },
-                            body: JSON.stringify({id: resourceId,
+                            body: JSON.stringify({id: resource.Id,
                                                             name: "",
                                                             description: "",
                                                             color: "",
                                                             quantity: 1,
-                                                            currentQuantity: TextInputCQ,
-                                                            comments: TextInputComments,
+                                                            currentQuantity: cQvalue,
+                                                            comments: commentsValue,
                                                             assignedTo: 1,
                                                             icon: "",
                                                             size:"",
-                                                            isActive:"",
+                                                            isActive:resource.IsActive,
                                                             createdBy:1,
                                                             createdDate:"2018-05-10T20:07:34.1713851+00:00",
                                                             modifiedBy:1,
@@ -76,9 +89,17 @@ const { TextInputComments }  = this.state ;
                                           .then((responseJson) => {
 
                                             this.setState({
-                                              isLoading: false
+                                              isLoading: false,
+                                              data: responseJson
                                             }, function(){
-
+                                            if(this.state.data.Status=="Success"){
+                                                if(global.role == 'Admin'){
+                                                    Actions.facility();
+                                                }
+                                                else{
+                                                    Actions.facilityforUser({id: global.userid});
+                                                }
+                                            }
                                             });
 
                                           })
@@ -118,7 +139,7 @@ const { TextInputComments }  = this.state ;
                 <Text>Comments: </Text>
                 <TextInput style={styles.inputArea} onChangeText={TextInputComments => this.setState({TextInputComments})}>
                 {item.Comments}</TextInput>
-                <TouchableOpacity style={styles.buttoncontainer} onPress={() =>this.onUpdate(item.Id)}>
+                <TouchableOpacity style={styles.buttoncontainer} onPress={() =>this.onUpdate(item)}>
                          <Text style={styles.buttontext}>Update</Text>
                           </TouchableOpacity>
         </View>
