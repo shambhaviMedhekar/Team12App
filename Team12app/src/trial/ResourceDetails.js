@@ -25,17 +25,20 @@ export default class ResourceDetails extends React.Component {
                 })
                .then((response) => response.json())
                      .then((responseJson) => {
+                     alert(responseJson.json())
                        this.setState({
                          isLoading: false,
-                         dataSource: responseJson
+                         dataSource: responseJson,
+                         TextInputCQ:responseJson.CurrentQuantity
                        }, function(){
+                       const { TextInputCQ }  = this.state ;
 
-                       });
+                                });
 
-                     })
-                     .catch((error) =>{
-                       console.error(error);
-                     });
+                              })
+                              .catch((error) =>{
+                                console.error(error);
+                              });
   }
 
 
@@ -45,7 +48,8 @@ const { TextInputCQ }  = this.state ;
 const { TextInputComments }  = this.state ;
 
 
- return fetch('xhttps://zcx23fv688.execute-api.us-east-1.amazonaws.com/dev/InsertUpdateResource', {
+
+ return fetch('https://zcx23fv688.execute-api.us-east-1.amazonaws.com/dev/InsertUpdateResource', {
                    method: 'POST',
                    headers: {
                             'Accept': 'application/json',
@@ -70,7 +74,7 @@ const { TextInputComments }  = this.state ;
                  })
                  .then((response) => response.json())
                                           .then((responseJson) => {
-                                          alert(JSON.stringify(responseJson))
+
                                             this.setState({
                                               isLoading: false
                                             }, function(){
