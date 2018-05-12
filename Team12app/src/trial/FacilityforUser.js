@@ -24,6 +24,7 @@ export default class FacilityforUser extends React.Component {
 
                         });
 
+
                     })
                     .catch((error) => {
                         console.error(error);
