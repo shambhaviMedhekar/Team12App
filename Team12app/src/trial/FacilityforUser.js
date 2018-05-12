@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         width: 300,
         alignItems: 'center',
-
+        alignSelf: 'center'
     },
     buttontext: {
         textAlign: 'center',

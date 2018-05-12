@@ -215,7 +215,8 @@ const styles = StyleSheet.create({
         marginTop: 10,
         width: 300,
         alignItems: 'center',
-        flex: 1
+        flex: 1,
+        alignSelf: 'center'
     },
     buttontext: {
         textAlign: 'center',
@@ -261,6 +262,7 @@ const styles = StyleSheet.create({
     },
     valueStyle: {
         flex: 2,
-        paddingRight: 10
+        paddingRight: 10,
+        fontWeight: 'bold'
     }
 });
