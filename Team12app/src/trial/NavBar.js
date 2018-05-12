@@ -16,7 +16,7 @@ class NavBar extends Component {
                 <StatusBar />
                 <Text style={styles.title}>{this.props.title}</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignSelf: 'flex-end', paddingBottom: 10 }}>
-                    <TouchableOpacity onPress={() => Actions.facility()}>
+                    <TouchableOpacity onPress={() => Actions.facilityforUser({ id: global.userid })}>
                         <Icon name='home' size={30} color='white' />
                     </TouchableOpacity>
                     <TouchableOpacity

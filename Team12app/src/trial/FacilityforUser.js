@@ -13,6 +13,23 @@ export default class FacilityforUser extends React.Component {
         Actions.facilityDetails({ id: facilityID })
     }
     componentDidMount() {
+    if(global.role === 'Admin'){
+         return fetch('https://zcx23fv688.execute-api.us-east-1.amazonaws.com/dev/GetAllFacilities')
+                    .then((response) => response.json())
+                    .then((responseJson) => {
+                        this.setState({
+                            isLoading: false,
+                            dataSource: responseJson
+                        }, function () {
+
+                        });
+
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
+    }
+    else{
         return fetch('https://zcx23fv688.execute-api.us-east-1.amazonaws.com/dev/GetFacilitiesByUser', {
             method: 'POST',
             headers: {
@@ -35,7 +52,7 @@ export default class FacilityforUser extends React.Component {
                 console.error(error);
             });
     }
-
+}
     render() {
 
         if (this.state.isLoading) {
@@ -48,7 +65,7 @@ export default class FacilityforUser extends React.Component {
 
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>Facilities For User:</Text>
+                <Text style={styles.title}>Facilities For {global.role}:</Text>
                 <FlatList
                     data={this.state.dataSource}
                     renderItem={({ item }) =>

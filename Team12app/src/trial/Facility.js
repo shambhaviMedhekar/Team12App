@@ -42,7 +42,7 @@ export default class Facility extends React.Component {
 
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>Facilities For Admin:</Text>
+                <Text style={styles.title}>Facilities For {global.role}:</Text>
                 <FlatList
                     data={this.state.dataSource}
                     renderItem={({ item }) =>

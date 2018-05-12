@@ -72,14 +72,14 @@ export default class LoginFormTrial extends Component {
                     onChangeText={TextInputUserName => this.setState({ TextInputUserName })}
                     autoCapitalize="none"
                     autoCorrect={false}
-                    value="admin"
+
                     underlineColorAndroid={'transparent'} />
                 <TextInput style={styles.input}
                     placeholder="Password"
                     placeholderTextColor="rgba(255,255,255,0.5)"
                     onChangeText={TextInputpwd => this.setState({ TextInputpwd })}
                     secureTextEntry
-                    value="admin"
+
                     underlineColorAndroid={'transparent'} />
                 <TouchableOpacity style={styles.buttoncontainer} onPress={this.onLogin2}>
                     <Text style={styles.buttontext}>Login</Text>
