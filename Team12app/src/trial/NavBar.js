@@ -1,60 +1,63 @@
 import {
- View,Text, Image, StatusBar, TouchableWithoutFeedback, TouchableOpacity
+    View, Text, Image, StatusBar, TouchableWithoutFeedback, TouchableOpacity
 } from 'react-native';
 import React, { Component } from 'react';
 import { Actions, Router, Scene } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
 
 class NavBar extends Component {
-  render() {
-    return (
-<View style={styles.backgroundStyle}>
-      <StatusBar />
-      <View style={{ flexDirection: 'row' }}>
-      <TouchableOpacity onPress={() => Actions.facility()}>
-     <Text>Facilities</Text>
-      </TouchableOpacity>
-       <TouchableOpacity onPress={() => Actions.login()}>
-           <Text>Logout</Text>
-            </TouchableOpacity>
-
-
-    </View>
-</View>
-    );
-  }
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        return (
+            <View style={styles.backgroundStyle}>
+                <StatusBar />
+                <Text style={styles.title}>{this.props.title}</Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignSelf: 'flex-end', paddingBottom: 10 }}>
+                    <TouchableOpacity onPress={() => Actions.facility()}>
+                        <Icon name='home' size={30} color='white' />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={ styles.logoutStyle}
+                        onPress={() => Actions.login()}>
+                        <Icon2 name='logout' size={30} color='red' />
+                    </TouchableOpacity>
+                </View>
+            </View>
+        );
+    }
 
 }
 const styles = {
-  backgroundStyle: {
-    backgroundColor:'#2980b9',
-    height:40,
-    color:'#ffffff'
-  },
-  backarrowStyle: {
-    resizeMode: 'stretch',
-    flexDirection: 'row',
-    width: 50,
-    height: 50,
-    left: 0,
-    justifyContent: 'flex-start'
-  },
-  helpStyle: {
-    resizeMode: 'stretch',
-      width: 50,
-      height: 50,
-      right: 220,
-      justifyContent: 'flex-end',
-      position: 'relative'
-
-  },
-  settingStyle: {
-    resizeMode: 'stretch',
-    width: 50,
-    height: 50,
-    justifyContent: 'flex-end',
-  position: 'relative',
-  left: 210
-  }
+    backgroundStyle: {
+        flexDirection: 'row',
+        backgroundColor: '#3498db',
+        height: 70,
+        paddingTop: 25,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.5,
+        elevation: 5
+    },
+    logoutStyle: {
+        paddingRight: 10,
+        paddingLeft: 10
+    },
+    textStyle: {
+        color: '#FFF',
+        fontSize: 20
+    },
+    title: {
+        color: '#fff',
+        marginTop: 10,
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        opacity: 0.9,
+        paddingLeft:50
+    }
 };
 
 

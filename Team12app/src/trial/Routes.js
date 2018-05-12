@@ -10,17 +10,17 @@ export default class Routes extends React.Component {
   render() {
 
     return (
-        <Router>
+        <Router navigationBarStyle={{ backgroundColor: '#3498db', paddingTop: 30, height: 80 }}>
             <Stack key="root" >
                 <Scene key="login" component={LoginTrial} title="Login"/>
 
-                <Scene key="facility" component={Facility} title="Facility" navBar={NavBar} navigationBarStyle={{backgroundColor:'transparent',height:50,marginTop:30, borderBottomWidth:0}}/>
+                <Scene key="facility" component={Facility} title="Facilities" navBar={NavBar}/>
 
-                <Scene key="facilityDetails" component={FacilityDetails} title="FacilityDetails" navBar={NavBar} navigationBarStyle={{backgroundColor:'transparent',height:50,marginTop:30, borderBottomWidth:0}}/>
+                <Scene key="facilityDetails" component={FacilityDetails} title="Inventory" navBar={NavBar} navigationBarStyle={{backgroundColor:'transparent',height:50,marginTop:30, borderBottomWidth:0}}/>
 
-              <Scene key="facilityforUser" component={FacilityforUser} title="FacilityforUser" navBar={NavBar} navigationBarStyle={{backgroundColor:'transparent',height:50,marginTop:30, borderBottomWidth:0}}/>
+              <Scene key="facilityforUser" component={FacilityforUser} title="Facilities" navBar={NavBar} navigationBarStyle={{backgroundColor:'transparent',height:50,marginTop:30, borderBottomWidth:0}}/>
 
-                <Scene key="resourceDetails" component={ResourceDetails} title="ResourceDetails" navBar={NavBar} navigationBarStyle={{backgroundColor:'transparent',height:50,marginTop:30, borderBottomWidth:0}}/>
+                <Scene key="resourceDetails" component={ResourceDetails} title="Resource" navBar={NavBar} navigationBarStyle={{backgroundColor:'transparent',height:50,marginTop:30, borderBottomWidth:0}}/>
             </Stack>
         </Router>
 
