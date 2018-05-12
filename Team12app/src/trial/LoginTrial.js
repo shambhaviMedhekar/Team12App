@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text, KeyboardAvoidingView } from 'react-native';
 import LoginFormTrial from './LoginFormTrial';
-import Facility from './Facility';
+import FacilityforUser from './FacilityforUser';
 import { createStackNavigator } from 'react-navigation';
 import Routes from './Routes';
 export default class LoginTrial extends Component {
     render() {
         const SimpleAppNavigator = createStackNavigator({
             LoginFormTrial: { screen: LoginFormTrial },
-            Facility: { screen: Facility }
+            FacilityforUser: { screen: FacilityforUser }
         });
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container}>

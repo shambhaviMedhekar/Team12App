@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text, TextInput, TouchableOpacity, StatusBar, Button, navigation, navigate, Alert } from 'react-native';
-import Facility from './Facility';
 import FacilityforUser from './FacilityforUser';
 import { Actions } from 'react-native-router-flux';
 export default class LoginFormTrial extends Component {
@@ -26,8 +25,7 @@ export default class LoginFormTrial extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ UserName: TextInputUserName, Password: TextInputpwd })
-        })
-            .then((response) => response.json())
+        }).then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
                     isLoading: false,
@@ -36,14 +34,8 @@ export default class LoginFormTrial extends Component {
                     if (this.state.dataSource.Id != 0) {
                         global.role = this.state.dataSource.Role;
                         global.userid = this.state.dataSource.Id;
-                        if (this.state.dataSource.Role == "Admin") {
-                            Actions.facility();
-                        }
-                        else if (this.state.dataSource.Role == "User") {
-                            const userID = this.state.dataSource.Id;
-
-                            Actions.facilityforUser({ id: userID });
-                        }
+                        const userID = this.state.dataSource.Id;
+                        Actions.facilityforUser({ id: userID });
                     }
                     else {
                         alert("User Name or Password is invalid!");
@@ -51,14 +43,10 @@ export default class LoginFormTrial extends Component {
 
 
                 });
-
             })
             .catch((error) => {
                 console.error(error);
             });
-
-
-        ;
     }
 
     render() {

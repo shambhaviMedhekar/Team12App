@@ -13,47 +13,46 @@ export default class FacilityforUser extends React.Component {
         Actions.facilityDetails({ id: facilityID })
     }
     componentDidMount() {
-    if(global.role === 'Admin'){
-         return fetch('https://zcx23fv688.execute-api.us-east-1.amazonaws.com/dev/GetAllFacilities')
-                    .then((response) => response.json())
-                    .then((responseJson) => {
-                        this.setState({
-                            isLoading: false,
-                            dataSource: responseJson
-                        }, function () {
+        if (global.role === 'Admin') {
+            return fetch('https://zcx23fv688.execute-api.us-east-1.amazonaws.com/dev/GetAllFacilities')
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    this.setState({
+                        isLoading: false,
+                        dataSource: responseJson
+                    }, function () {
 
-                        });
-
-
-                    })
-                    .catch((error) => {
-                        console.error(error);
                     });
-    }
-    else{
-        return fetch('https://zcx23fv688.execute-api.us-east-1.amazonaws.com/dev/GetFacilitiesByUser', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ Id: this.props.id })
-        })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                this.setState({
-                    isLoading: false,
-                    dataSource: responseJson,
-                }, function () {
 
+                })
+                .catch((error) => {
+                    console.error(error);
                 });
-
+        }
+        else {
+            return fetch('https://zcx23fv688.execute-api.us-east-1.amazonaws.com/dev/GetFacilitiesByUser', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ Id: this.props.id })
             })
-            .catch((error) => {
-                console.error(error);
-            });
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    this.setState({
+                        isLoading: false,
+                        dataSource: responseJson,
+                    }, function () {
+
+                    });
+
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
     }
-}
     render() {
 
         if (this.state.isLoading) {

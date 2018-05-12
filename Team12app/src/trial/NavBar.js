@@ -3,8 +3,8 @@ import {
 } from 'react-native';
 import React, { Component } from 'react';
 import { Actions, Router, Scene } from 'react-native-router-flux';
-import Icon from 'react-native-vector-icons/FontAwesome'
-import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 
 class NavBar extends Component {
     constructor(props) {
@@ -14,14 +14,22 @@ class NavBar extends Component {
         return (
             <View style={styles.backgroundStyle}>
                 <StatusBar />
+                <TouchableOpacity onPress={() => this.props.navigation.goBack(null)} style={{
+                    position: 'absolute',
+                    paddingTop: 25,
+                    paddingHorizontal: 10,
+                    zIndex: 10
+                }}>
+                    <Image source={require('../Images/back-button.png')} />
+                </TouchableOpacity>
                 <Text style={styles.title}>{this.props.title}</Text>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignSelf: 'flex-end', paddingBottom: 10 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'flex-end', alignSelf: 'flex-end', paddingBottom: 10, flex: 1 }}>
                     <TouchableOpacity onPress={() => Actions.facilityforUser({ id: global.userid })}>
                         <Icon name='home' size={30} color='white' />
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={ styles.logoutStyle}
-                        onPress={() => Actions.login()}>
+                        onPress={() => Actions.reset('login')}>
                         <Icon2 name='logout' size={30} color='red' />
                     </TouchableOpacity>
                 </View>
@@ -47,7 +55,8 @@ const styles = {
     },
     textStyle: {
         color: '#FFF',
-        fontSize: 20
+        fontSize: 20,
+        flex: 5
     },
     title: {
         color: '#fff',

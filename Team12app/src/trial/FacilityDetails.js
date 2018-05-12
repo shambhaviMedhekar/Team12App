@@ -12,7 +12,7 @@ export default class FacilityDetails extends React.Component {
     }
     onResourceClick
     onResourceClick = (resourceID) => {
-        Actions.resourceDetails( { id: resourceID } );
+        Actions.resourceDetails({ id: resourceID });
     }
     componentDidMount() {
         return fetch('https://zcx23fv688.execute-api.us-east-1.amazonaws.com/dev/GetAllInventoryForFacility', {
@@ -54,12 +54,12 @@ export default class FacilityDetails extends React.Component {
                         data={this.state.dataSource}
                         renderItem={
                             ({ item }) =>
-                                
-                            <ListItem
-                                style={styles.itemStyle}
-                                title={`${item.Name}`}
-                                onPress={() => this.onResourceClick(item.Id)}
-                            />
+
+                                <ListItem
+                                    style={styles.itemStyle}
+                                    title={`${item.Name}`}
+                                    onPress={() => this.onResourceClick(item.Id)}
+                                />
                         }
                         keyExtractor={(item, index) => index}
                     />
